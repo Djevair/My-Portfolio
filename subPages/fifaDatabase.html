@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIFA Database</title>
+    <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    <script src="https://kit.fontawesome.com/b378803734.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/fifaDatabase.css">
+</head>
+<body>
+    <nav>
+        <div class="navigationBar">
+            <a href="../index.html" id="name"><img src="../img/Logo_300 x 250.svg" alt="Logo"></a>
+            <div class="rightNav">
+                <a href="#contact">Contact</a>
+                <a href="../index.html">Portfolio</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="header">
+        <h1>Football Association Database System</h1>
+        <p>The Football Association Database project is designed to model the complex structure of the football world, including clubs, players, leagues, countries, sponsors, and coaches. It tracks essential attributes such as club details, player careers and transfers, league membership, international representation, sponsorship contracts, and coaching history. With its interconnected relationships, the system provides a clear and organized way to store and manage all major football-related data.</p>
+        <a href="https://github.com/Djevair/FIFA-Database-" class="ctaBtn">View Project</a>
+    </div>
+
+   <div class="relationModel">
+        <h1>The Relation Model</h1>
+        <p>Before diving deeper, here’s an overview of the key pieces that shape the database. Each card represents an important entity in the system and shows how everything connects behind the scenes.</p>
+        <div class="container">
+            <div class="card" data-hover="Name,Club ID, Establishing Year, City">
+                <h3>Club</h3>
+                <p>Stores club name, city, year, league & country. 
+                   <br>Connected to players, coaches & sponsors.</p>
+            </div>
+            <div class="card" data-hover="Kit Number, Position, Age, First Name, Last Name, Player ID">
+                <h3>Player</h3>
+                <p>Contains full player profile: name, age, position, nationality & kit number. 
+                    <br>Connected to transfers.</p>
+            </div>
+            <div class="card" data-hover="Price">
+                <h3>Transfer</h3>
+                <p>Tracks player movement between clubs, storing transfer fees, contract details, and important dates.</p>
+            </div>
+            <div class="card" data-hover="League ID, Name, Number of Teams">
+                <h3>League</h3>
+                <p>Shows the league name, number of teams, and the country it belongs to, giving a clear overview of its structure.</p>
+            </div>
+            <div class="card" data-hover="Contract Length, Name, Sponsor ID">
+                <h3>Sponsors</h3>
+                <p>Many-to-many model: sponsors can support players, AND clubs with contract details.</p>
+            </div>
+            <div class="card" data-hover="Coach ID, First Name, Last Name, Age">
+                <h3>Coaches</h3>
+                <p>Tracks coaching careers across multiple clubs with personal info & assignments.</p>
+            </div>
+            <div class="card" data-hover="Name, Country ID, Rank">
+                <h3>Country</h3>
+                <p>Represents each nation's name, ranking, and ID, and links players and leagues to their home country.</p>
+            </div>
+        </div>
+   </div>
+
+   <div class="diagram">
+        <h1>Entity–Relationship Diagram (ERD)</h1>
+        <p>The diagram below visually represents how all parts of the database system connect with each other. After introducing each component individually in the previous section, this ERD shows the relationships between clubs, players, coaches, sponsors, and matches in a clear, structured way. It helps readers understand the overall database design at a glance and see how data flows through the system.</p>
+        <img src="../img/ER.png">
+    </div>
+
+    <div class="sqlSection">
+    <h1>Example SQL Queries</h1>
+    <p>Below are a few sample queries that demonstrate how data is retrieved and connected inside the Football Association Database.</p>
+
+    <div class="sqlCard">
+        <h3>1. List the names and cities of all clubs in the country with ID 74, excluding FC Koln.</h3>
+            <pre><code>
+                SELECT CB.NAME, CB.CITY
+                FROM CLUB CB, COUNTRY C
+                WHERE C.COUNTRY_ID = CB.COUNTRY_ID AND C.COUNTRY_ID = 74
+                AND CB.NAME <> 'FC KOLN';
+            </code></pre>
+        </div>
+
+        <div class="sqlCard">
+            <h3>2. List the first and last names of all players, along with their country (matching players to their country).</h3>
+            <pre><code>
+                SELECT FNAME, LNAME
+                FROM PLAYER
+                INNER JOIN COUNTRY
+                ON PLAYER.COUNTRY_ID = COUNTRY.COUNTRY_ID;
+            </code></pre>
+        </div>
+
+        <div class="sqlCard">
+            <h3>3. List the first name, last name, and jersey number of all players along with their country.</h3>
+            <pre><code>
+                SELECT FNAME, LNAME, KIT_NO
+                FROM PLAYER
+                INNER JOIN COUNTRY
+                ON PLAYER.COUNTRY_ID = COUNTRY.COUNTRY_ID;
+            </code></pre>
+        </div>
+    </div>
+
+
+    <footer>
+        <div class="left">
+            <h3>Get In Touch</h3>
+            <p>Have a project in mind or want to work together? Send me a message below.</p>
+            <form action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="001b67aa-6e46-46dd-9ecb-e66c67055d8f">
+                <div class="message">
+                    <div class="inputFields">
+                        <input type="text" name="name" placeholder="Full Name" required>
+                        <input type="email" name="email" placeholder="Email" required>
+                    </div>
+                    <textarea name="message" placeholder="Enter Your Message Here..." required></textarea>
+                </div>
+                <button type="submit"><i class="fas fa-paper-plane"></i>Send Message</button>
+            </form>
+        </div>
+        <div class="right">
+            <h3>Contact</h3>
+            <div class="row">
+                <div class="socials">
+                    <p>Socials</p>
+                    <a href="https://instagram.com/yourprofile"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://wa.me/YourNumber"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="viber://chat?number=YourNumber"><i class="fa-brands fa-viber"></i></a>
+                </div>
+                <div class="info">
+                    <h5>My Number</h5>
+                    <p>+389 75 945 602</p>
+                    <h5>My Email</h5>
+                    <p>dzekoavmedoski@yahoo.com</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+<script src="../js/fifaDatabase.js"></script>
+</html>
